@@ -1,0 +1,7 @@
+Kontrast K:
+
+v1=(v-vmax/2)*K+vmax/2
+
+Helligkeit H:
+
+v1=v+H
