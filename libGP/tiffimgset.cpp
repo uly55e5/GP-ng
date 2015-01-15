@@ -17,6 +17,7 @@ TIFF* TiffImgSet::open(int directory)
 
 TiffImg *TiffImgSet::getImg(int num)
 {
+  _images[num]->readRawValues();
   return _images[num];
 }
 

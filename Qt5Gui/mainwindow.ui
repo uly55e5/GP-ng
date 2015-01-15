@@ -16,17 +16,17 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,5">
     <item>
-     <widget class="QToolBox" name="toolBox">
+     <widget class="QToolBox" name="mainToolBox">
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="tifToolPage">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
          <width>129</width>
-         <height>476</height>
+         <height>482</height>
         </rect>
        </property>
        <attribute name="label">
@@ -34,30 +34,60 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <layout class="QHBoxLayout" name="tifSliderLayout">
           <item>
            <widget class="QSlider" name="brightnessSlider">
+            <property name="minimum">
+             <number>-256</number>
+            </property>
             <property name="maximum">
              <number>256</number>
             </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="pageStep">
+             <number>25</number>
+            </property>
+            <property name="tracking">
+             <bool>false</bool>
+            </property>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::TicksAbove</enum>
+            </property>
+            <property name="tickInterval">
+             <number>25</number>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QSlider" name="contrastSlider">
             <property name="minimum">
-             <number>-5</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>5</number>
+             <number>1000</number>
             </property>
             <property name="pageStep">
              <number>1</number>
             </property>
+            <property name="value">
+             <number>10</number>
+            </property>
+            <property name="tracking">
+             <bool>false</bool>
+            </property>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::TicksBelow</enum>
+            </property>
+            <property name="tickInterval">
+             <number>50</number>
             </property>
            </widget>
           </item>
@@ -70,8 +100,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>129</width>
-         <height>476</height>
+         <width>96</width>
+         <height>26</height>
         </rect>
        </property>
        <attribute name="label">
@@ -81,7 +111,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="mainTabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -89,9 +119,9 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="ImageTab">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
@@ -103,7 +133,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QGraphicsView" name="graphicsView">
+         <widget class="QGraphicsView" name="tifImageView">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>1</horstretch>
@@ -118,21 +148,7 @@
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="verticalLayout"/>
       </widget>
      </widget>
     </item>
@@ -144,7 +160,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

@@ -11,6 +11,9 @@ class TiffImgSet;
 class TiffImg
 {
 public:
+typedef std::vector<uint16_t> RawVector;
+typedef std::vector<uint32_t> RgbVector;
+public:
   enum class Photometric: uint16_t { WHITISZERO=0, BLACKISZERO=1 };
   enum class Compression: uint16_t { NONE=1,LZW=5 };
   TiffImg(TiffImgSet* set);
@@ -27,18 +30,27 @@ public:
   void setRowsPerStrip(uint32_t rows);
   void readRawValues();
   u_char* rgbaData();
+  void setBrightness(double br);
+  void setContrast(double co);
+  static RawVector withBrightness(int32_t brightness, const RawVector& input);
+  static RawVector withContrast(uint16_t Contrast, const RawVector& input);
+
 private:
+
 
     TiffImgSet* mImgSet;
     Photometric mPhotometric;
     uint16_t mWidth, mHeight, mSamples, mDepth;
     std::string mDescription;
     Compression mCompression;
-    std::vector<uint16_t> * mRawValues;
+    RawVector * mRawValues;
 
-    std::vector<uint32_t> * mRgbValues;
+    RgbVector * mRgbValues;
     uint16_t mTiffDirectory;
     uint32_t mRowsPerStrip;
+
+    int32_t mBrightness;
+    uint16_t mContrast;
 };
 
 #endif // TIFFIMG_H

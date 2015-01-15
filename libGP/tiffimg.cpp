@@ -4,7 +4,8 @@
 #include <iostream>
 #include <ios>
 
-TiffImg::TiffImg(TiffImgSet *set):mImgSet(set),mRawValues(nullptr),mRgbValues(nullptr)
+TiffImg::TiffImg(TiffImgSet *set):mImgSet(set),mRawValues(nullptr),
+    mRgbValues(nullptr),mContrast(UINT16_MAX/100),mBrightness(0)
 {
 
 }
@@ -87,12 +88,46 @@ u_char *TiffImg::rgbaData()
 {
   if(!mRgbValues)
     mRgbValues=new std::vector<uint32_t>(mRawValues->size());
-  std::transform(mRawValues->begin(),mRawValues->end(),mRgbValues->begin(),[&](uint16_t &raw){
-    //std::cout << std::hex << (raw>>8) << "  ";
+
+  auto raw = withBrightness(mBrightness,*mRawValues);
+  raw = withContrast(mContrast,raw);
+  std::transform(raw.begin(),raw.end(),mRgbValues->begin(),[&](uint16_t &raw){
     return 0xFF000000+(raw>>8)*0x00010000;});
-  /* for(int i=0; i<5000;i++)
-    {
-      std::cout << std::hex << mRawValues->at(i) << " : " << mRgbValues->at(i) << std::hex << std::endl;
-    }*/
+
   return (u_char*)mRgbValues->data();
 }
+
+void TiffImg::setBrightness(double br)
+{
+    mBrightness=std::min(UINT16_MAX,std::max(-UINT16_MAX,int(br*UINT16_MAX)));
+}
+
+void TiffImg::setContrast(double co)
+{
+    mContrast=std::min(UINT16_MAX,std::max(0,int(co*UINT16_MAX/5)));
+}
+
+TiffImg::RawVector TiffImg::withBrightness(int32_t brightness, const RawVector &input)
+{
+    if(!brightness)
+        return std::move(input);
+    RawVector result(input.size());
+    std::transform(input.begin(),input.end(),result.begin(),[&](uint16_t raw){
+        return std::min(UINT16_MAX,std::max(0,raw+brightness));
+    });
+    return std::move(result);
+}
+
+TiffImg::RawVector TiffImg::withContrast(uint16_t contrast, const TiffImg::RawVector &input)
+{
+    if(contrast==UINT16_MAX/5)
+        return std::move(input);
+    double cont = double(contrast)/UINT16_MAX*100;
+    RawVector result(input.size());
+    std::transform(input.begin(),input.end(),result.begin(),[&](uint16_t raw){
+        return std::min(UINT16_MAX,std::max(0,int((raw-UINT16_MAX/2)*cont+UINT16_MAX/2)));
+    });
+    return std::move(result);
+}
+
+
