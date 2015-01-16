@@ -4,25 +4,28 @@
 #include "../libGP/tiffimgset.h"
 #include "../libGP/tiffimg.h"
 
+#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
-  ui(new Ui::MainWindow)
+  ui(new Ui::MainWindow),
+  mPixmapItem(nullptr)
 {
   ui->setupUi(this);
   connect(ui->brightnessSlider,&QSlider::valueChanged,this,&MainWindow::setBrightness);
   connect(ui->contrastSlider,&QSlider::valueChanged,this,&MainWindow::setContrast);
-  mTiffScene = new QGraphicsScene;
-  ui->tifImageView->setScene(mTiffScene);
+   mTiffView = new TiffGraphicsView(ui->ImageTab);
+   mTiffView->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding);
+
+  mTiffView->adjustSize();
+  mTiffView->adjustSize();
+  mTiffScene = new QGraphicsScene(mTiffView);
+
+  mTiffView->setScene(mTiffScene);
   setTifImage();
   updateImage();
-
-
-
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -40,16 +43,18 @@ void MainWindow::setTifImage()
     TiffImgSet * tiffs = new TiffImgSet("1769-31-D12.tif");
     mTifImg = tiffs->getImg(2);
     updateImage();
+    mTiffView->adjustSize();
 }
 
 void MainWindow::updateImage()
 {
     QImage im{mTifImg->rgbaData(),mTifImg->Width(),mTifImg->Height(),QImage::Format_RGB32};
     QPixmap pm = QPixmap::fromImage(im);
-    mTiffScene->clear();
-    mTiffScene->addPixmap(pm);
+    if(mPixmapItem)
+        mTiffScene->removeItem(dynamic_cast<QGraphicsItem*> (mPixmapItem));
+    mPixmapItem = mTiffScene->addPixmap(pm);
     mTiffScene->setSceneRect(pm.rect());
-    ui->tifImageView->update();
+    mTiffView->update();
 }
 
 void MainWindow::setBrightness(int brightness)
@@ -62,5 +67,4 @@ void MainWindow::setContrast(int contrast)
 {
     mTifImg->setContrast(double(contrast)/200);
     updateImage();
-
 }

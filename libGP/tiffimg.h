@@ -51,6 +51,7 @@ private:
 
     int32_t mBrightness;
     uint16_t mContrast;
+    bool rgbChanged;
 };
 
 #endif // TIFFIMG_H

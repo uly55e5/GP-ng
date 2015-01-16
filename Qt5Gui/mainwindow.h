@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 
 #include "../libGP/tiffimg.h"
+#include "tiffgraphicsview.h"
 
 namespace Ui {
   class MainWindow;
@@ -29,6 +30,8 @@ private:
   Ui::MainWindow *ui;
 
   QGraphicsScene * mTiffScene;
+  TiffGraphicsView * mTiffView;
+  QGraphicsPixmapItem * mPixmapItem;
 
 };
 
