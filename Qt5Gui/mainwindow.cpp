@@ -7,7 +7,10 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 #include <iostream>
-
+/*!
+ * \brief MainWindow::MainWindow
+ * \param parent
+ */
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow),

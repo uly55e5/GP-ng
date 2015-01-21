@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1426</width>
+    <height>889</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,5">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,5">
     <item>
      <widget class="QToolBox" name="mainToolBox">
       <property name="currentIndex">
@@ -25,16 +25,16 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>129</width>
-         <height>482</height>
+         <width>234</width>
+         <height>771</height>
         </rect>
        </property>
        <attribute name="label">
         <string>Page 1</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <layout class="QHBoxLayout" name="tifSliderLayout">
+         <layout class="QHBoxLayout" name="tiffSliderLayout">
           <item>
            <widget class="QSlider" name="brightnessSlider">
             <property name="minimum">
@@ -93,6 +93,41 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QRadioButton" name="selectGreenButton">
+          <property name="text">
+           <string>Green (535)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="selectRedButton">
+          <property name="text">
+           <string>Red (635)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="selectRedGreenButton">
+          <property name="text">
+           <string>Red op Green</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="redGreenOperatorLayout">
+          <item>
+           <widget class="QComboBox" name="redGreenOperatorBox"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="exChangeRedGreenButton">
+            <property name="text">
+             <string>&lt;-&gt;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
@@ -100,8 +135,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>129</width>
-         <height>482</height>
+         <width>234</width>
+         <height>771</height>
         </rect>
        </property>
        <attribute name="label">
@@ -148,12 +183,37 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1426</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Image"/>
+    <addaction name="actionLoad_Array_List"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoad_Result"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLoad_Image">
+   <property name="text">
+    <string>Load Image...</string>
+   </property>
+  </action>
+  <action name="actionLoad_Array_List">
+   <property name="text">
+    <string>Load Array List...</string>
+   </property>
+  </action>
+  <action name="actionLoad_Result">
+   <property name="text">
+    <string>Load Result...</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
