@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>234</width>
-         <height>771</height>
+         <height>765</height>
         </rect>
        </property>
        <attribute name="label">
@@ -94,6 +94,16 @@
          </layout>
         </item>
         <item>
+         <widget class="QRadioButton" name="selectRedButton">
+          <property name="text">
+           <string>Red (635)</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="selectGreenButton">
           <property name="text">
            <string>Green (535)</string>
@@ -101,16 +111,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="selectRedButton">
-          <property name="text">
-           <string>Red (635)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QRadioButton" name="selectRedGreenButton">
           <property name="text">
-           <string>Red op Green</string>
+           <string>Red / Green</string>
           </property>
          </widget>
         </item>
@@ -120,7 +123,7 @@
            <widget class="QComboBox" name="redGreenOperatorBox"/>
           </item>
           <item>
-           <widget class="QPushButton" name="exChangeRedGreenButton">
+           <widget class="QPushButton" name="exchangeRedGreenButton">
             <property name="text">
              <string>&lt;-&gt;</string>
             </property>
@@ -136,7 +139,7 @@
          <x>0</x>
          <y>0</y>
          <width>234</width>
-         <height>771</height>
+         <height>765</height>
         </rect>
        </property>
        <attribute name="label">
@@ -184,34 +187,43 @@
      <x>0</x>
      <y>0</y>
      <width>1426</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionLoad_Image"/>
-    <addaction name="actionLoad_Array_List"/>
+    <addaction name="loadImageAction"/>
+    <addaction name="loadGalAction"/>
     <addaction name="separator"/>
-    <addaction name="actionLoad_Result"/>
+    <addaction name="loadResultAction"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionLoad_Image">
+  <action name="loadImageAction">
    <property name="text">
     <string>Load Image...</string>
    </property>
+   <property name="toolTip">
+    <string>Load Tiff file from GenePix</string>
+   </property>
   </action>
-  <action name="actionLoad_Array_List">
+  <action name="loadGalAction">
    <property name="text">
     <string>Load Array List...</string>
    </property>
+   <property name="toolTip">
+    <string>Load GenePix Array List (GAL)</string>
+   </property>
   </action>
-  <action name="actionLoad_Result">
+  <action name="loadResultAction">
    <property name="text">
     <string>Load Result...</string>
+   </property>
+   <property name="toolTip">
+    <string>Load GenePix Result File (GPR)</string>
    </property>
   </action>
  </widget>

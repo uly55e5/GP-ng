@@ -26,7 +26,7 @@ void TiffImgSet::readTags()
   TIFF* tif=open();
         if (tif) {
             int dircount = 0;
-            uint16 width,height,depth,samples;
+            uint16_t height,depth,samples,width;
             uint32 rows;
             TiffImg::Photometric photometric;
             TiffImg::Compression compression;
@@ -43,7 +43,6 @@ void TiffImgSet::readTags()
                 TIFFGetField(tif,TIFFTAG_BITSPERSAMPLE,&depth);
                 TIFFGetField(tif,TIFFTAG_COMPRESSION,&compression);
                 TIFFGetField(tif,TIFFTAG_ROWSPERSTRIP, &rows);
-
                 tiffImg->setTiffDirectory(dircount);
                 tiffImg->setPhotometric(photometric);
                 tiffImg->setWidth(width);
