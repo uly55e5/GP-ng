@@ -4,3 +4,4 @@ CMakeLists.txt.user*
 exdata/
 build-Release/
 build-release
+build-Debug/

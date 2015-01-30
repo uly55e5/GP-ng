@@ -103,11 +103,14 @@ u_char *TiffImg::rgbaData()
         auto pos = mRgbValues->data();
         auto cpos = cache.data();
         auto rpos = mRawValues->data();
-        for(int i=0; i<mRawValues->size();i++)
+        t=clock();
+        int end= mRawValues->size();
+        for(int i=0; i<end;i++)
         {
             *(pos+i) = *(cpos+*(rpos+i));
         }
 
+        std::cout << "Time: " << (double(clock())-t)/CLOCKS_PER_SEC << " s." << std::endl;
         rgbChanged=false;
     }
     return (u_char*)mRgbValues->data();
